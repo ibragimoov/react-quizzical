@@ -74,6 +74,7 @@ hr {
     display: flex;
     flex-direction: column;
     align-items: center;
+    user-select: none;
 }
 
 .start--title {
@@ -85,6 +86,7 @@ hr {
 .start--desc {
     color: #293264;
     margin-bottom: 30px;
+    
 }
 
 .blob-1 {
@@ -109,11 +111,13 @@ hr {
     font-size: 20px;
     margin-bottom: 7px;
     max-width: 600px;
+    user-select: none;
 }
 
 .quiz--answers {
     display: flex;
     margin-bottom: 10px;
+    user-select: none;
 }
 
 .quiz--btn {
@@ -127,6 +131,7 @@ hr {
     padding-left: 10px;
     padding-right: 10px;
     max-width: 300px;
+    user-select: none;
 }
 
 .quiz-btn-selected {
@@ -160,6 +165,7 @@ hr {
 
     .start--info {
         margin-top: 60%;
+        user-select: none;
     }
 
     .noQuiz-error {
@@ -172,9 +178,11 @@ hr {
 
     .quiz--check > button {
         font-size: 20px;
+        user-select: none;
     }
 
     .quiz--btn {
         padding: 7px;
+        user-select: none;
     }
 }
