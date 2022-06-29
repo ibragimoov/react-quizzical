@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Answer from './Answers'
 import {nanoid} from 'nanoid'
 
-export default function Quiz({handleGameStart}) {
+export default function Quiz({handleGameStart, handleNoQuestionsError}) {
 
     const [allQuestions, setAllQuestions] = useState([])
     const [checkAnswers, setCheckAnswers] = useState(false)
@@ -13,10 +13,19 @@ export default function Quiz({handleGameStart}) {
     const allQuestionsAnswered = allQuestions.every(question => question.selectedAnswer !== "");
 
     useEffect(() => {
-        fetch('https://opentdb.com/api.php?amount=5')
+        fetch('https://opentdb.com/api.php?a1mount=5')
             .then(res => res.json())
             .then(data => data.results)
             .then(data => {
+                if (data.length === 0) {
+                    console.log(1)
+                    handleGameStart();
+                    handleNoQuestionsError(true);
+                    return;
+                } else {
+                    handleNoQuestionsError(false);
+                }
+
                 return setAllQuestions(data.map(quest => {
                     return {
                         ...quest,

@@ -146,3 +146,19 @@ hr {
     display: flex;
     align-items: center;
 }
+
+.noQuiz-error {
+    margin-bottom: 1.5em;
+	text-align: center;
+    color: red;
+}
+
+@media (max-width: 700px) {
+    .noQuiz-error {
+        margin-bottom: 1em;
+        text-align: center;
+        color: red;
+        max-width: 300px;
+        font-size: 20px;
+    }
+}
