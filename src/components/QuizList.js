@@ -13,7 +13,7 @@ export default function Quiz({handleGameStart, handleNoQuestionsError}) {
     const allQuestionsAnswered = allQuestions.every(question => question.selectedAnswer !== "");
 
     useEffect(() => {
-        fetch('https://opentdb.com/api.php?a1mount=5')
+        fetch('https://opentdb.com/api.php?amount=5')
             .then(res => res.json())
             .then(data => data.results)
             .then(data => {
