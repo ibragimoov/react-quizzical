@@ -5,7 +5,6 @@ import {nanoid} from 'nanoid'
 export default function Quiz({handleGameStart, handleNoQuestionsError}) {
 
     const [allQuestions, setAllQuestions] = useState([])
-    const [checkAnswers, setCheckAnswers] = useState(false)
     const [isGameOver, setIsGameOver] = useState(false);
     const [checkAnswerBtn, setCheckAnswerBtn] = useState(false);
     const [correctAnswersCount, setCorrectAnswersCount] = useState(0);
@@ -35,7 +34,7 @@ export default function Quiz({handleGameStart, handleNoQuestionsError}) {
                     }
                 }))
             })        
-    }, [])
+    }, [handleGameStart, handleNoQuestionsError])
 
     useEffect(() => {
 		if (allQuestions.length !== 0 && allQuestionsAnswered) {
