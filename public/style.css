@@ -115,7 +115,7 @@ hr {
     display: flex;
 }
 
-.quiz--answers > button {
+.quiz--btn {
     background-color: transparent;
     border-radius: 10px;
     border: 0.79px solid #4D5B9E;
@@ -126,4 +126,16 @@ hr {
     padding-left: 10px;
     padding-right: 10px;
     max-width: 300px;
+}
+
+.quiz-btn-selected {
+    background-color: #D6DBF5
+}
+
+.quiz-btn-incorrect {
+    background-color: red;
+}
+
+.quiz-btn-correct {
+    background-color: greenyellow;
 }

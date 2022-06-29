@@ -1,54 +1,20 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Start from './components/Start'
-import Quiz from './components/Quiz'
-import { nanoid } from "nanoid";
+import QuizList from './components/QuizList'
 
 export default function App() {
 
-    const [allQuestions, setAllQuestions] = useState([])
     const [gameStart, setGameStart] = useState(false)
-    const [checkAnswers, setCheckAnswers] = useState(false)
-
-    useEffect(() => {
-        fetch('https://opentdb.com/api.php?amount=5')
-            .then(res => res.json())
-            .then(data => {
-                setAllQuestions(data.results)
-            })
-        
-    }, [])
-
-    useEffect(() => {
-        
-    }, [checkAnswers])
-
-    const allQuestionsElements = allQuestions.map(quiz => {
-        return <Quiz 
-            key={nanoid()}
-            question={quiz.question}
-            incorrect_answers={quiz.incorrect_answers}
-            correct_answer={quiz.correct_answer}
-            />
-    })
 
     function startGame() {
         setGameStart(prevGameStart => !prevGameStart)
     }
 
-    function checkAnswer() {
-        
-    }
-  
     return (
         <div className='app'>
             {gameStart ? 
                 <div className='quiz'>
-                    {allQuestionsElements}
-                    <div className="quiz--check">
-                        <button onClick={checkAnswer} className="btn">
-                            Check answers
-                        </button>
-                    </div>
+                    <QuizList />
                 </div>
                 : <Start gameStart={() => startGame()} />
             }
