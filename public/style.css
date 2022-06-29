@@ -175,16 +175,6 @@ hr {
     }
 
     .quiz--btn {
-        background-color: transparent;
-        border-radius: 10px;
-        border: 0.79px solid #4D5B9E;
-        color: #293264;
-        font-size: 18px;
-        margin-right: 13px;
-        display: inline-block;
-        padding-left: 10px;
-        padding-right: 10px;
-        max-width: 300px;
         padding: 7px;
     }
 }
