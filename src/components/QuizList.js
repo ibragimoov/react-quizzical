@@ -2,11 +2,15 @@ import { useEffect, useState } from "react";
 import Answer from './Answers'
 import {nanoid} from 'nanoid'
 
-export default function Quiz(props) {
+export default function Quiz({handleGameStart}) {
 
     const [allQuestions, setAllQuestions] = useState([])
     const [checkAnswers, setCheckAnswers] = useState(false)
     const [isGameOver, setIsGameOver] = useState(false);
+    const [checkAnswerBtn, setCheckAnswerBtn] = useState(false);
+    const [correctAnswersCount, setCorrectAnswersCount] = useState(0);
+
+    const allQuestionsAnswered = allQuestions.every(question => question.selectedAnswer !== "");
 
     useEffect(() => {
         fetch('https://opentdb.com/api.php?amount=5')
@@ -24,16 +28,47 @@ export default function Quiz(props) {
             })        
     }, [])
 
+    useEffect(() => {
+		if (allQuestions.length !== 0 && allQuestionsAnswered) {
+			let correctAnswers = 0;
+			
+			allQuestions.forEach(question => {
+				if (question.correct_answer === question.selectedAnswer)
+					correctAnswers++;
+			});
+
+			setCorrectAnswersCount(correctAnswers);
+			setCheckAnswerBtn(true);
+		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [allQuestions]);
+
     const handleSelectAnswer = (quizId, answer) => {
 		if (!isGameOver) {
-			setAllQuestions(prevQuestionsArray => (
-				prevQuestionsArray.map(question => (
+			setAllQuestions(prevAnswer => (
+				prevAnswer.map(question => (
 					question.id === quizId
 						? {...question, selectedAnswer: answer }
 						: question
 				))
 			));
 		}
+	}
+
+    const checkAnswer = () => {
+		if (allQuestions) {
+			setIsGameOver(true);
+
+			setAllQuestions(prevQuestionsArray => (
+				prevQuestionsArray.map(question => ({...question, showAnswer: true }))
+			));
+		}
+	}
+
+    const resetGame = () => {
+		setCheckAnswerBtn(false);
+		setIsGameOver(false);
+		handleGameStart();
 	}
 
     const quizElements = allQuestions.map(quest => {
@@ -51,19 +86,23 @@ export default function Quiz(props) {
 
     return (
         <div className='quiz--container'>
-            {/* <h3 className='quiz--title'>
-
-            </h3>
-            <div className='quiz--answers'>
-                {}
-            </div>
-            <hr/>
-            <div className="quiz--check">
-                <button className="btn">
-                    {checkAnswers ? "Reset" : "Check answers"}
-                </button>
-            </div> */}
             {quizElements}
+
+            <div className="quiz--check">
+                {isGameOver &&
+					<h3 className="correct-answers-text">
+						You scored {correctAnswersCount}/5 correct answers
+					</h3>
+				}
+                <button
+					className={`btn ${checkAnswerBtn
+                        ? "btn-check-answers"
+                        : "btn-check-answers-disabled"}`}
+					onClick={isGameOver ? resetGame : checkAnswer}
+				>
+					{isGameOver ? "Play again" : "Check answers"}
+				</button>
+            </div>
         </div>
     )
 }

@@ -102,7 +102,7 @@ hr {
 
 .quiz--container {
     margin: 20px;
-    margin-bottom: 5px;
+    margin-bottom: 30px;
 }
 
 .quiz--title {
@@ -133,9 +133,15 @@ hr {
 }
 
 .quiz-btn-incorrect {
-    background-color: red;
+    background-color: #e66f86;
 }
 
 .quiz-btn-correct {
-    background-color: greenyellow;
+    background-color: #88dd88;
+}
+
+.correct-answers-text {
+    margin-right: 20px;
+    display: flex;
+    align-items: center;
 }

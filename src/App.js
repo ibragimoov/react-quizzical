@@ -10,11 +10,13 @@ export default function App() {
         setGameStart(prevGameStart => !prevGameStart)
     }
 
+    const handleGameStart = () => setGameStart(prevState => !prevState);
+
     return (
         <div className='app'>
             {gameStart ? 
                 <div className='quiz'>
-                    <QuizList />
+                    <QuizList handleGameStart={handleGameStart}/>
                 </div>
                 : <Start gameStart={() => startGame()} />
             }
