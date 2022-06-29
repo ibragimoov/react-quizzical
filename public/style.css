@@ -113,6 +113,7 @@ hr {
 
 .quiz--answers {
     display: flex;
+    margin-bottom: 10px;
 }
 
 .quiz--btn {
